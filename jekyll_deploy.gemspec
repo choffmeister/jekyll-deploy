@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
   s.authors     = ['Christian Hoffmeister']
   s.email       = 'mail@choffmeister.de'
   s.files       = ['lib/jekyll_deploy.rb']
-  s.homepage    = 'http://rubygems.org/gems/jekyll_deploy'
+  s.homepage    = 'https://github.com/choffmeister/jekyll_deploy'
   s.license     = 'MIT'
 end

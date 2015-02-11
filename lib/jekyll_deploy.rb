@@ -23,6 +23,8 @@ class DeployCommand < Jekyll::Command
         case settings['type']
           when 'git'
             deploy_git(destination, settings['repo'], settings['branch'])
+          when 'rsync'
+            deploy_rsync(destination, settings['host'], settings['user'], settings['directory'])
           else
             raise "Unknown deployment type #{settings['type']}"
         end
@@ -39,14 +41,21 @@ class DeployCommand < Jekyll::Command
       Jekyll::Commands::Build.process(options)
     end
 
-    def deploy_git(dir, repo, branch)
+    def deploy_git(site_destination, repo, branch)
       run_shell([
         "git init",
         "git add .",
         "git commit -m \"Build\"",
         "git remote add origin \"#{repo}\"",
         "git push origin master:#{branch} --force"
-      ], dir)
+      ], site_destination)
+    end
+
+    def deploy_rsync(site_destination, host, user, directory)
+      site_destination << '/' unless site_destination.end_with?('/')
+      directory << '/' unless directory.end_with?('/')
+
+      run_shell("rsync -avr --delete #{site_destination} #{user}@#{host}:#{directory}", Dir.pwd)
     end
 
     def run_shell(cmds, dir)
