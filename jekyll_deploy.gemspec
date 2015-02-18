@@ -1,12 +1,26 @@
-Gem::Specification.new do |s|
-  s.name        = 'jekyll_deploy'
-  s.version     = '0.0.0'
-  s.date        = '2015-02-11'
-  s.summary     = 'Adds deploy command yo Jekyll'
-  s.description = 'Adds deploy command yo Jekyll'
-  s.authors     = ['Christian Hoffmeister']
-  s.email       = 'mail@choffmeister.de'
-  s.files       = ['lib/jekyll_deploy.rb']
-  s.homepage    = 'https://github.com/choffmeister/jekyll_deploy'
-  s.license     = 'MIT'
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'jekyll_deploy/version'
+
+Gem::Specification.new do |spec|
+  spec.name          = "jekyll_deploy"
+  spec.version       = DeployCommand::VERSION
+  spec.authors       = ["Christian Hoffmeister"]
+  spec.email         = ["mail@choffmeister.de"]
+  spec.summary       = "A deployment command for Jekyll."
+  spec.description   = ""
+  spec.homepage      = "https://github.com/choffmeister/jekyll_deploy"
+  spec.license       = "MIT"
+
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rspec", "~> 3.2.0"
+
+  spec.add_dependency "jekyll", ">= 2.5.0"
 end
