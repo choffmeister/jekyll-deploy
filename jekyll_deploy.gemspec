@@ -5,7 +5,7 @@ require 'jekyll_deploy/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll_deploy"
-  spec.version       = DeployCommand::VERSION
+  spec.version       = JekyllDeploy::VERSION
   spec.authors       = ["Christian Hoffmeister"]
   spec.email         = ["mail@choffmeister.de"]
   spec.summary       = "A deployment command for Jekyll."
